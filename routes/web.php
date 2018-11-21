@@ -12,11 +12,23 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('default.test');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix(config('app.admin_path'))->group(function() {
+  Route::middleware(['checkPermissions:Administrator'])->group(function() {
+    Route::get('/', function () {
+      return view('admin');
+    })->name('index');
+  });
+});
 
-Route::get('/admin', 'AdminController@index')->name('admin');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('/admin', 'AdminController@index')->name('admin');
 
 Auth::routes();

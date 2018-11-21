@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends($theme.'.layout')
 
 @section('content')
 <div class="container">
